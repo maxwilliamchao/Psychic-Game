@@ -37,7 +37,7 @@ document.onkeyup = function(event) {
       if(randomLetter === userLetterLowerCase){
         wins++;
         // console.log('BOOM')
-        start();  //Using this start() makes wins increment (see note on top) but does not reset losses
+       //Using this start() makes wins increment (see note on top) but does not reset losses
         //start()        //Using this start() or BOTH start()s makes losses reset to 0 between games but does not increment wins 
       }else{
         // console.log('bye')
