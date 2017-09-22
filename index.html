@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Psychic Game</title>
+</head>
+<body>
+  <h1>The Psychic Game
+  <h2>Guess what letter I'm thinking of</h2>
+
+<div id="game">
+    <p>Are you psychic? Guess the letter I'm thinking to test your skills</p>
+</div>
+
+  <!-- <div>
+    Wins: <span id="winCount">a</span>
+  </div>
+
+  <div>
+    Loses: <span id="loseCount">a</span>
+  </div> -->
+
+  <!-- <div>
+    Guesses Left: <span id="guessCount">a</span>
+  </div> -->
+
+  <div>
+    Guesses So Far: <span id="guessedLetters">a</span>
+  </div>
+  <script type="text/javascript">
+
+var wins = 0;
+var losses = 0;
+var guessremain = 9;
+
+
+var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+var randlet = Math.floor(Math.random() * alphabet.length);
+
+var guessedLetters = document.getElementById("guessedLetters");
+
+var html =
+          "<p>You chose: " + guessedLetters + "</p>" +
+          "<p>The computer chose: " + alphabet[randlet] + "</p>" +
+          "<p>wins: " + wins + "</p>" +
+          "<p>losses: " + losses + "</p>" + 
+          "<p>guesses left: " + guessremain + "</p>";
+
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+
+
+
+
+   
+
+
+document.onkeyup = function(event) {
+        console.log(event)
+        guessedLetters.textContent = event.key;
+      };
+
+if (alphabet[randlet] == guessedLetters) {
+wins++
+}
+else {
+guessremain--
+};
+  </script>
+</body>
+</html>
