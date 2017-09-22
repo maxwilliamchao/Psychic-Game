@@ -1,4 +1,4 @@
-<!--Bugs: Scores not initally displayed when page loads (and display onkeyup despite variables being declared AND initialized beforehand like the console.logged randomLetter), wins not incrementing until the correct key is pressed and the user guesses another letter, guesses left not decrementing, start function not resetting scores-->
+<!--Bugs: Scores not initally displayed when page loads (and display onkeyup despite variables being declared AND initialized beforehand like the console.logged randomLetter), wins not incrementing until the correct key is pressed and the user guesses another letter, start function not resetting scores-->
 
 <!DOCTYPE html>
 <html>
@@ -66,8 +66,9 @@ document.onkeyup = function(event) {
       renderlosses()
       if(randomLetter === userLetterLowerCase){
         wins++;
+        alert('You guessed it!')
         // console.log('BOOM')
-        start();  //Using this start() makes wins increment (see note on top) but does not reset losses
+         //Using this start() makes wins increment (see note on top) but does not reset losses
         //start()        //Using this start() or BOTH start()s makes losses reset to 0 between games but does not increment wins 
       }else{
         // console.log('bye')
