@@ -1,3 +1,5 @@
+<!--Bugs: Scores not initally displayed when page loads (and display onkeyup despite variables being declared AND initialized beforehand like the console.logged randomLetter), wins not incrementing until the correct key is pressed and the user guesses another letter, guesses left not decrementing, start function not resetting scores-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,20 +36,20 @@ var guessremain = 9;
 var lettersGuessed = [];
 var randomLetter;
 var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
 function start(){
   wins = 0
   losses = 0
   guessremain = 9 
   randomLetter = generateRandomLetter(alphabet).toLowerCase()
 }
-
 start()
+
 console.log(randomLetter)
 
 function generateRandomLetter(arr){
   var randNum = Math.floor(Math.random() * arr.length);
   return arr[randNum]
-
 }
 
 document.onkeyup = function(event) {
@@ -63,14 +65,21 @@ document.onkeyup = function(event) {
       renderwins()
       renderlosses()
       if(randomLetter === userLetterLowerCase){
-       wins++
-       start()
+        wins++;
+        // console.log('BOOM')
+        start();  //Using this start() makes wins increment (see note on top) but does not reset losses
+        //start()        //Using this start() or BOTH start()s makes losses reset to 0 between games but does not increment wins 
       }else{
+        // console.log('bye')
         if(guessremain > 1){
-          losses++
+          // losses++
+          guessremain--
+          // console.log('happy festivus')
         }else{
           losses++
-          start()
+          guessremain--
+          // console.log('merry xmas')
+          start();
         }
       }
   }
