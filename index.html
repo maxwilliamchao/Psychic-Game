@@ -8,46 +8,105 @@
   <h2>Guess what letter I'm thinking of</h2>
 
 <div id="game">
-    <p>Are you psychic? Guess the letter I'm thinking to test your skills</p>
+    <p>Are you psychic? Press any key to start and guess the letter I'm thinking to test your skills</p>
 </div>
 
-  <!-- <div>
-    Wins: <span id="winCount">a</span>
+  <div>
+    Wins: <span id="winCount"></span>
   </div>
 
   <div>
-    Loses: <span id="loseCount">a</span>
-  </div> -->
-
-  <!-- <div>
-    Guesses Left: <span id="guessCount">a</span>
-  </div> -->
+    Loses: <span id="loseCount"></span>
+  </div>
 
   <div>
-    Guesses So Far: <span id="guessedLetters">a</span>
+    Guesses Left: <span id="guessCount"></span>
+  </div>
+
+  <div>
+    Guesses So Far: <span id="guessedLetters"></span>
   </div>
   <script type="text/javascript">
 
 var wins = 0;
 var losses = 0;
 var guessremain = 9;
-
-
+var lettersGuessed = [];
+var randomLetter;
 var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+function start(){
+  wins = 0
+  losses = 0
+  guessremain = 9 
+  randomLetter = generateRandomLetter(alphabet).toLowerCase()
+}
 
-var randlet = Math.floor(Math.random() * alphabet.length);
+start()
+console.log(randomLetter)
 
-var guessedLetters = document.getElementById("guessedLetters");
+function generateRandomLetter(arr){
+  var randNum = Math.floor(Math.random() * arr.length);
+  return arr[randNum]
 
-var html =
-          "<p>You chose: " + guessedLetters + "</p>" +
-          "<p>The computer chose: " + alphabet[randlet] + "</p>" +
-          "<p>wins: " + wins + "</p>" +
-          "<p>losses: " + losses + "</p>" + 
-          "<p>guesses left: " + guessremain + "</p>";
+}
 
-        // Set the inner HTML contents of the #game div to our html string
-        document.querySelector("#game").innerHTML = html;
+document.onkeyup = function(event) {
+
+  // display number of gueeses remaining
+  var userLetterLowerCase = event.key.toLowerCase()
+  // console.log("hello")
+
+  if (!lettersGuessed.includes(userLetterLowerCase) && alphabet.includes(userLetterLowerCase)){
+      lettersGuessed.push(userLetterLowerCase)
+      renderGuesses()
+      renderremainguess()
+      renderwins()
+      renderlosses()
+      if(randomLetter === userLetterLowerCase){
+       wins++
+       start()
+      }else{
+        if(guessremain > 1){
+          losses++
+        }else{
+          losses++
+          start()
+        }
+      }
+  }
+  
+}
+
+function renderGuesses(){
+  document.querySelector("#guessedLetters").innerHTML = lettersGuessed.join(' ');
+}
+function renderremainguess(){
+  document.querySelector('#guessCount').innerHTML = guessremain;
+  // console.log(guessremain)
+}
+function renderwins(){
+  document.querySelector('#winCount').innerHTML = wins;
+  console.log('hi')
+}
+function renderlosses(){
+  document.querySelector('#loseCount').innerHTML = losses;
+  // console.log(guessremain)
+}
+// var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+
+
+// var guessedLetters = document.getElementById("guessedLetters");
+
+// var html =
+//           "<p>You chose: " + guessedLetters + "</p>" +
+//           "<p>The computer chose: " + alphabet[randlet] + "</p>" +
+//           "<p>wins: " + wins + "</p>" +
+//           "<p>losses: " + losses + "</p>" + 
+//           "<p>guesses left: " + guessremain + "</p>";
+
+//         // Set the inner HTML contents of the #game div to our html string
+//         document.querySelector("#game").innerHTML = html;
 
 
 
@@ -55,17 +114,21 @@ var html =
    
 
 
-document.onkeyup = function(event) {
-        console.log(event)
-        guessedLetters.textContent = event.key;
-      };
+// document.onkeyup = function(event) {
+//         console.log(event)
+//         guessedLetters.textContent = event.key;
+//       };
 
-if (alphabet[randlet] == guessedLetters) {
-wins++
-}
-else {
-guessremain--
-};
-  </script>
+// if (alphabet[randlet] == guessedLetters) {
+// wins++
+// }
+// else {
+// guessremain--
+// };
+
+// if (guessremain === 0) {
+//  losses++
+// };
+ </script>
 </body>
 </html>
